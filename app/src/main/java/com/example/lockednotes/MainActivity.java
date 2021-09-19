@@ -1,16 +1,25 @@
 package com.example.lockednotes;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.TargetApi;
 import android.app.KeyguardManager;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.Manifest;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CancellationSignal;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyPermanentlyInvalidatedException;
 import android.security.keystore.KeyProperties;
-
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 import androidx.core.app.ActivityCompat;
 
 import android.widget.TextView;
@@ -28,6 +37,9 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import android.os.Bundle;
+import android.widget.Toast;
+
+
 public class MainActivity extends AppCompatActivity {
 
     // Declare a string variable for the key we’re going to use in our fingerprint authentication
@@ -169,7 +181,6 @@ public class MainActivity extends AppCompatActivity {
             throw new RuntimeException("Failed to init Cipher", e);
         }
     }
-
     private class FingerprintException extends Exception {
         public FingerprintException(Exception e) {
             super(e);

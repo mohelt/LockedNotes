@@ -1,21 +1,49 @@
 package com.example.lockednotes;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.annotation.TargetApi;
+import android.app.KeyguardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.Manifest;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.CancellationSignal;
+import android.security.keystore.KeyGenParameterSpec;
+import android.security.keystore.KeyPermanentlyInvalidatedException;
+import android.security.keystore.KeyProperties;
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 import androidx.core.app.ActivityCompat;
+
+import android.widget.TextView;
+import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
+import android.os.Bundle;
 import android.widget.Toast;
 
 @TargetApi(Build.VERSION_CODES.M)
 public class FingerprintHandler extends FingerprintManager.AuthenticationCallback {
 
     // You should use the CancellationSignal method whenever your app can no longer process user input, for example when your app goes
-    // into the background. If you don’t use this method, then other apps will be unable to access the touch sensor, including the lockscreen!//
-
+    // into the background. If you don’t use this method, then other apps will be unable to access the touch sensor, including the lockscreen!/
     private CancellationSignal cancellationSignal;
     private Context context;
 
@@ -64,8 +92,11 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
     //onAuthenticationSucceeded is called when a fingerprint has been successfully matched to one of the fingerprints stored on the user’s device//
     public void onAuthenticationSucceeded(
             FingerprintManager.AuthenticationResult result) {
+        Intent intent = new Intent(context, Notepad.class);
+        context.startActivity(intent);
 
         Toast.makeText(context, "Success!", Toast.LENGTH_LONG).show();
     }
 
 }
+
